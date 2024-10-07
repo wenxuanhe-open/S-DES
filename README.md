@@ -24,15 +24,11 @@
 
 - **第一关：基本功能测试**：确保核心算法在处理 8 位数据和 10 位密钥时能够正确运行，生成正确的加密和解密结果。
 
-[<video src="movie.mp4.mp4" controls="controls" width="500" height="300"></video>](https://github.com/user-attachments/assets/2f68c712-f345-422b-a27d-a03b73d8001d)
+[https://github.com/user-attachments/assets/2f68c712-f345-422b-a27d-a03b73d8001d](https://github.com/user-attachments/assets/2f68c712-f345-422b-a27d-a03b73d8001d)
 
 - **第二关：交叉测试**：对不同算法实现（如 `sdes_base.py` 和 `sdes_base_o1.py`）的结果进行比较，以确保一致性。
 
-<video controls>
-  <source src="./.assets/sdes-2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+[https://github.com/user-attachments/assets/1c4a6964-1b01-4b5e-875c-a914c32e8284](https://github.com/user-attachments/assets/1c4a6964-1b01-4b5e-875c-a914c32e8284)
 
 - **第三关：扩展功能测试**：验证 `sdes_qtv3.py` 能够正确处理 ASCII 字符串的加密和解密。
 

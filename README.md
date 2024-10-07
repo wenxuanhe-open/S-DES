@@ -32,17 +32,11 @@
 
 - **第三关：扩展功能测试**：验证 `sdes_qtv3.py` 能够正确处理 ASCII 字符串的加密和解密。
 
-<video controls>
-  <source src="./.assets/sdes-3.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[https://github.com/user-attachments/assets/f614faf6-ab13-4538-bb63-996f36edf360](https://github.com/user-attachments/assets/f614faf6-ab13-4538-bb63-996f36edf360)
 
 - **第四关：暴力破解测试**：测试暴力破解的实现，确保能够成功恢复正确的加密密钥。
 
-<video controls>
-  <source src="./.assets/sdes-4.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[https://github.com/user-attachments/assets/d3df41c2-060f-44aa-bc25-509a275000f4](https://github.com/user-attachments/assets/d3df41c2-060f-44aa-bc25-509a275000f4)
 
 - **第五关：封闭测试**：
 

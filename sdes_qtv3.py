@@ -120,8 +120,8 @@ class SDESApp(QWidget):
 
     def initUI(self):
         # Set up the GUI elements
-        self.setWindowTitle('S-DES Encryption/Decryption')
-        self.setGeometry(100, 100, 600, 500)
+        self.setWindowTitle('SDES Encryption/Decryption Tool')
+        self.setGeometry(100, 100, 400, 400)
         self.setStyleSheet("background-color: #f0f0f0;")
 
         layout = QVBoxLayout()
@@ -129,13 +129,13 @@ class SDESApp(QWidget):
 
         # Title Label
         title_label = QLabel('S-DES Encryption/Decryption Tool')
-        title_label.setFont(QFont('Arial', 16))
+        title_label.setFont(QFont('Arial', 18, QFont.Bold))
         title_label.setAlignment(Qt.AlignCenter)
-        title_label.setStyleSheet("padding: 10px; color: #2c3e50;")
+        title_label.setStyleSheet("color: #2c3e50; margin-bottom: 20px;")
         layout.addWidget(title_label)
 
         # Key Input Section
-        key_layout = QHBoxLayout()
+        key_layout = QVBoxLayout()
         self.key_label = QLabel('10-bit Key:')
         self.key_label.setFont(QFont('Arial', 12))
         key_layout.addWidget(self.key_label)
@@ -143,12 +143,13 @@ class SDESApp(QWidget):
         self.key_input = QLineEdit()
         self.key_input.setFont(QFont('Arial', 12))
         self.key_input.setPlaceholderText('e.g. 1010000010')
+        self.key_input.setStyleSheet("padding: 5px; margin-bottom: 15px;")
         key_layout.addWidget(self.key_input)
 
         layout.addLayout(key_layout)
 
         # Plaintext Input Section
-        plaintext_layout = QHBoxLayout()
+        plaintext_layout = QVBoxLayout()
         self.plaintext_label = QLabel('Plaintext:')
         self.plaintext_label.setFont(QFont('Arial', 12))
         plaintext_layout.addWidget(self.plaintext_label)
@@ -156,6 +157,7 @@ class SDESApp(QWidget):
         self.plaintext_input = QLineEdit()
         self.plaintext_input.setFont(QFont('Arial', 12))
         self.plaintext_input.setPlaceholderText('e.g. HELLO or 10010111')
+        self.plaintext_input.setStyleSheet("padding: 5px; margin-bottom: 20px;")
         plaintext_layout.addWidget(self.plaintext_input)
 
         layout.addLayout(plaintext_layout)
@@ -163,12 +165,12 @@ class SDESApp(QWidget):
         # Encrypt Button
         self.encrypt_button = QPushButton('Encrypt')
         self.encrypt_button.setFont(QFont('Arial', 12))
-        self.encrypt_button.setStyleSheet("background-color: #3498db; color: white; padding: 10px;")
+        self.encrypt_button.setStyleSheet("background-color: #3498db; color: white; padding: 10px; margin-bottom: 20px;")
         self.encrypt_button.clicked.connect(self.encrypt_text)
         layout.addWidget(self.encrypt_button)
 
         # Ciphertext Output Section
-        ciphertext_layout = QHBoxLayout()
+        ciphertext_layout = QVBoxLayout()
         self.ciphertext_label = QLabel('Ciphertext:')
         self.ciphertext_label.setFont(QFont('Arial', 12))
         ciphertext_layout.addWidget(self.ciphertext_label)
@@ -176,8 +178,8 @@ class SDESApp(QWidget):
         self.ciphertext_output = QTextEdit()
         self.ciphertext_output.setFont(QFont('Arial', 12))
         self.ciphertext_output.setReadOnly(True)
-        self.ciphertext_output.setStyleSheet("background-color: #ecf0f1;")
-        self.ciphertext_output.setFixedHeight(100)
+        self.ciphertext_output.setStyleSheet("background-color: #ecf0f1; padding: 5px; margin-bottom: 20px;")
+        self.ciphertext_output.setFixedHeight(80)
         ciphertext_layout.addWidget(self.ciphertext_output)
 
         layout.addLayout(ciphertext_layout)
@@ -185,12 +187,12 @@ class SDESApp(QWidget):
         # Decrypt Button
         self.decrypt_button = QPushButton('Decrypt')
         self.decrypt_button.setFont(QFont('Arial', 12))
-        self.decrypt_button.setStyleSheet("background-color: #2ecc71; color: white; padding: 10px;")
+        self.decrypt_button.setStyleSheet("background-color: #2ecc71; color: white; padding: 10px; margin-bottom: 20px;")
         self.decrypt_button.clicked.connect(self.decrypt_text)
         layout.addWidget(self.decrypt_button)
 
         # Decrypted Text Output Section
-        decrypted_layout = QHBoxLayout()
+        decrypted_layout = QVBoxLayout()
         self.decrypted_label = QLabel('Decrypted Text:')
         self.decrypted_label.setFont(QFont('Arial', 12))
         decrypted_layout.addWidget(self.decrypted_label)
@@ -198,7 +200,7 @@ class SDESApp(QWidget):
         self.decrypted_output = QLineEdit()
         self.decrypted_output.setFont(QFont('Arial', 12))
         self.decrypted_output.setReadOnly(True)
-        self.decrypted_output.setStyleSheet("background-color: #ecf0f1;")
+        self.decrypted_output.setStyleSheet("background-color: #ecf0f1; padding: 5px;")
         decrypted_layout.addWidget(self.decrypted_output)
 
         layout.addLayout(decrypted_layout)
@@ -206,7 +208,6 @@ class SDESApp(QWidget):
         self.setLayout(layout)
 
     def encrypt_text(self):
-        # Encrypt the input plaintext using the provided key
         try:
             key = [int(bit) for bit in self.key_input.text()]
             plaintext = self.plaintext_input.text()
@@ -214,12 +215,11 @@ class SDESApp(QWidget):
                 raise ValueError("Key must be 10 bits.")
             sdes = SDES(key)
 
-            # Determine if the plaintext is binary or ASCII
             if plaintext.isdigit() and len(plaintext) == 8 and set(plaintext).issubset({'0', '1'}):
                 # Handle 8-bit binary input
                 plaintext_bits = [int(bit) for bit in plaintext]
                 encrypted_bits = sdes.encrypt(plaintext_bits)
-                encrypted_text = ' '.join(map(str, encrypted_bits))
+                encrypted_text = ''.join(map(str, encrypted_bits))
             else:
                 # Handle ASCII string input
                 encrypted_bits_list = sdes.encrypt_text(plaintext)
@@ -230,7 +230,6 @@ class SDESApp(QWidget):
             QMessageBox.critical(self, "Input Error", str(e))
 
     def decrypt_text(self):
-        # Decrypt the input ciphertext using the provided key
         try:
             key = [int(bit) for bit in self.key_input.text()]
             encrypted_text = self.ciphertext_output.toPlainText()
@@ -239,14 +238,15 @@ class SDESApp(QWidget):
             sdes = SDES(key)
 
             # Determine if the input is binary or ASCII encrypted text
-            encrypted_bits_list = [list(map(int, bits)) for bits in encrypted_text.split() if bits.isdigit()]
-            if len(encrypted_bits_list[0]) == 8:
-                # Decrypt ASCII-based encrypted text
-                decrypted_text = sdes.decrypt_text(encrypted_bits_list)
-            else:
+            encrypted_bits_list = encrypted_text.split()
+            if len(encrypted_bits_list) == 1 and len(encrypted_bits_list[0]) == 8:
                 # Handle decryption of binary ciphertext
-                decrypted_bits = [int(bit) for bit in encrypted_text.split()]
+                decrypted_bits = [int(bit) for bit in encrypted_bits_list[0]]
                 decrypted_text = ''.join(map(str, sdes.decrypt(decrypted_bits)))
+            else:
+                # Decrypt ASCII-based encrypted text
+                encrypted_bits_list = [list(map(int, bits)) for bits in encrypted_bits_list if bits.isdigit()]
+                decrypted_text = sdes.decrypt_text(encrypted_bits_list)
             
             self.decrypted_output.setText(decrypted_text)
         except ValueError as e:

@@ -25,7 +25,7 @@
 - **第一关：基本功能测试**：确保核心算法在处理 8 位数据和 10 位密钥时能够正确运行，生成正确的加密和解密结果。
 
 <video controls>
-  <source src=".assets/sdes-1.mp4" type="video/mp4">
+  <source src="./.assets/sdes-1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

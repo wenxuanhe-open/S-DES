@@ -1,3 +1,5 @@
+import random
+
 class SDES:
     def __init__(self, key):
         # Initialize the key and various permutation tables
@@ -98,22 +100,26 @@ class SDES:
         plaintext = self.inverse_initial_permutation(bits)  # Apply the inverse initial permutation
         return plaintext
 
+def generate_random_plaintexts(count, length=8):
+    plaintexts = set()  
+    while len(plaintexts) < count:
+        plaintext = tuple(random.randint(0, 1) for _ in range(length))  
+        plaintexts.add(plaintext)  
+    return list(plaintexts)
 
-# Example usage
+
 key = [1, 0, 1, 0, 0, 0, 0, 0, 1, 0]  # 10-bit key
-plaintext = [1, 0, 0, 1, 0, 1, 1, 1]  # 8-bit plaintext
-
-# key = [0, 1, 1, 0, 1, 0, 1, 1, 1, 0]  # 10-bit key
-# plaintext = [1, 1, 0, 0, 1, 0, 1, 1]  # 8-bit plaintext
-
-# key = [1, 0, 1, 1, 0, 1, 0, 1, 1, 0]  # 10-bit key
-# plaintext = [0, 1, 1, 0, 0, 1, 0, 1]  # 8-bit plaintext
-
-
 sdes = SDES(key)
-ciphertext = sdes.encrypt(plaintext)  # Encrypt the plaintext
-decrypted_text = sdes.decrypt(ciphertext)  # Decrypt the ciphertext
 
-print("Plaintext:", plaintext)
-print("Ciphertext:", ciphertext)
-print("Decrypted Text:", decrypted_text)
+plaintexts = generate_random_plaintexts(50)
+results = []
+
+for plaintext in plaintexts:
+    ciphertext = sdes.encrypt(plaintext) 
+    results.append((plaintext, ciphertext)) 
+
+with open('ciphertext_results.txt', 'w') as f:
+    for plaintext, ciphertext in results:
+        f.write(f"Plaintext: {list(plaintext)}, Ciphertext: {list(ciphertext)}\n")
+
+print("Plaintext and ciphertext have been written to the file ciphertext_results.txt")

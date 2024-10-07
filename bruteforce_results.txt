@@ -1,0 +1,10 @@
+Brute Force Attack for all pairs started at 2024-10-07 15:58:59
+Round 1: 4 keys match. Keys: ['1011001010', '0111000010', '0110001010', '1010000010']
+Round 2: 2 keys match. Keys: ['1011001010', '1010000010']
+Round 3: 2 keys match. Keys: ['1011001010', '1010000010']
+Round 4: 2 keys match. Keys: ['1011001010', '1010000010']
+Round 5: 2 keys match. Keys: ['1011001010', '1010000010']
+Round 6: 2 keys match. Keys: ['1011001010', '1010000010']
+Round 7: 1 keys match. Keys: ['1010000010']
+Unique Key found: 1010000010
+Brute force attack started at: 2024-10-07 15:58:59, ended at: 2024-10-07 15:58:59, total time taken: 0.02 seconds
